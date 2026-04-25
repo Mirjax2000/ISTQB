@@ -6,6 +6,8 @@ from rich.console import Console
 from data.questions_a import QUESTIONS as QUESTIONS_A
 from data.questions_b import QUESTIONS as QUESTIONS_B
 from data.questions_c import QUESTIONS as QUESTIONS_C
+import rich._unicode_data
+
 
 # ---
 cons: Console = Console()
@@ -263,4 +265,11 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        print("\nDošlo k chybě:", e)
+        import traceback
+
+        traceback.print_exc()
+        input("\nStiskněte Enter pro ukončení...")
