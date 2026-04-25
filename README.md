@@ -1,2 +1,0 @@
-# ISTQB
-Kviz por ISTQB
