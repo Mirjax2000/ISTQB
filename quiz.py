@@ -158,7 +158,7 @@ def select_quiz_mode(total_questions: int) -> str:
     """Ask the user to choose sequential or random mode; return '1' or '2'."""
     cons.print()
     cons.print("Vyberte režim kvízu:", style="blue")
-    cons.print("  [cyan]1[/cyan]) Otázky od začátku (všechny postupně)")
+    cons.print("  [cyan]1[/cyan]) Otázky postupně")
     cons.print("  [cyan]2[/cyan]) Náhodné otázky")
     cons.print()
     while True:
@@ -168,6 +168,23 @@ def select_quiz_mode(total_questions: int) -> str:
             clear_screen()
             return mode
         cons.print("Neplatná volba. Zadejte prosím 1 nebo 2.", style="red")
+
+
+def select_start_question(max_question: int) -> int:
+    while True:
+        raw = input(f"Zadej od jaké otázky začít (1 až {max_question}): ").strip()
+        try:
+            started_question = int(raw)
+        except ValueError:
+            cons.print("Zadej platné číslo.", style="red")
+            continue
+        if 1 <= started_question <= max_question:
+            cons.clear()
+            clear_screen()
+            return started_question
+        cons.print(
+            f"Číslo musí být v rozsahu 1 až {max_question}. Zkus to znovu.", style="red"
+        )
 
 
 def read_question_count(total_questions: int) -> int:
@@ -223,13 +240,19 @@ def print_quiz_results(score: int, total_points: int) -> None:
 
 
 def run_quiz(questions_list: List[Dict]) -> None:
-    """Orchestrate mode selection, question loop and result display."""
     if not questions_list:
         cons.print("Chyba: Nejsou k dispozici žádné otázky.", style="red")
         return
 
     mode = select_quiz_mode(len(questions_list))
-    questions = build_question_list(questions_list, mode)
+    if mode == "1":
+        max_question = len(questions_list)
+        start = select_start_question(max_question)
+        questions = questions_list[start - 1 :]
+    else:
+        questions = questions_list
+
+    questions = build_question_list(questions, mode)
     score, total_points = run_questions(questions)
     print_quiz_results(score, total_points)
 
