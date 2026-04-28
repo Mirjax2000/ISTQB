@@ -110,7 +110,7 @@ QUESTIONS = [
         },
         "correct": ["b"],
         "points": 1,
-        "explanation": "[gold1]  I. Je správně.[/gold1] [white bold]Zvolený SDLC nemá žádný vliv na přístup k testování.[/white bold]\n"
+        "explanation": "[gold1]  I. Je správně.[/gold1] [white bold]Zvolený SDLC má významný vliv na přístup k testování.[/white bold]\n"
         " II. Není správně. Počet zjištěných defektů v předchozích projektech může mít určitý vliv, ale ne tak významný jako I, III a IV.\n"
         "[gold1]III. Je správně[/gold1]. [white bold]Identifikovaná produktová rizika jsou jedním z nejdůležitějších faktorů ovlivňujících přístup k testování.[/white bold]\n"
         "[gold1] IV. Je správně[/gold1]. [white bold]Regulatorní požadavky jsou důležitými faktory ovlivňujícími přístup k testování.[/white bold]\n"

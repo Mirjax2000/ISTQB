@@ -1,12 +1,12 @@
 """quiz.py"""
 
 import random
+import os
 from typing import Dict, List, Set
 from rich.console import Console
 from data.questions_a import QUESTIONS as QUESTIONS_A
 from data.questions_b import QUESTIONS as QUESTIONS_B
 from data.questions_c import QUESTIONS as QUESTIONS_C
-import rich._unicode_data
 
 
 # ---
@@ -122,6 +122,10 @@ def print_result(
         cons.print(explanation, style="grey50")
 
 
+def clear_screen():
+    os.system("cls" if os.name == "nt" else "clear")
+
+
 def ask_question(question: Dict) -> bool:
     """Show a single question, read answer from user, return True if correct."""
     if not question:
@@ -145,6 +149,7 @@ def ask_question(question: Dict) -> bool:
     print_result(correct_flag, correct, options, explanation)
     cons.input("Stiskněte Enter pro pokračování...")
     cons.clear()
+    clear_screen()
 
     return correct_flag
 
@@ -159,6 +164,8 @@ def select_quiz_mode(total_questions: int) -> str:
     while True:
         mode = cons.input("Zadejte volbu (1/2): ").strip()
         if mode in ("1", "2"):
+            cons.clear()
+            clear_screen()
             return mode
         cons.print("Neplatná volba. Zadejte prosím 1 nebo 2.", style="red")
 
